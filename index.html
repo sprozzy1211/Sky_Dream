@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyDream - Sleep Sounds for the Skies & Beyond</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+```
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #0f172a 0%, #1a2949 50%, #0a1428 100%);
+        color: #dde6f5;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    .stars {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: white;
+        border-radius: 50%;
+    }
+
+    @keyframes barAnim {
+        0%, 100% { height: 4px; }
+        50% { height: 20px; }
+    }
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(14px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 4px;
+        background: transparent;
+        outline: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #7ec8e3;
+        cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #7ec8e3;
+        cursor: pointer;
+        border: none;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 0 16px 40px;
+    }
+
+    .header {
+        text-align: center;
+        padding: 36px 0 8px;
+        animation: fadeUp 0.5s ease both;
+    }
+
+    .header-label {
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #7ec8e3;
+        opacity: 0.8;
+        margin-bottom: 8px;
+    }
+
+    .header-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 36px;
+        font-weight: 400;
+        line-height: 1.1;
+    }
+
+    .header-title em {
+        font-style: italic;
+        color: #7ec8e3;
+    }
+
+    .header-subtitle {
+        margin-top: 8px;
+        font-size: 13px;
+        color: rgba(221, 230, 245, 0.5);
+        font-weight: 300;
+    }
+
+    .now-playing {
+        margin: 24px 0 16px;
+        background: rgba(40, 80, 110, 0.08);
+        border: 1px solid rgba(126, 200, 227, 0.2);
+        border-radius: 20px;
+        padding: 18px 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        backdrop-filter: blur(12px);
+        transition: all 0.4s;
+        animation: fadeUp 0.5s 0.08s ease both;
+    }
+
+    .now-playing.idle {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .visualizer {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(40, 80, 110, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+
+    .bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 2.5px;
+        height: 22px;
+    }
+
+    .bar {
+        width: 3px;
+        border-radius: 2px;
+        background: #7ec8e3;
+        height: 4px;
+        transition: height 0.3s;
+    }
+
+    .bar.active {
+        animation: barAnim 0.8s ease-in-out infinite;
+    }
+
+    .now-playing-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .now-playing-label {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(221, 230, 245, 0.45);
+        margin-bottom: 3px;
+    }
+
+    .now-playing-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 18px;
+        font-weight: 600;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .now-playing-desc {
+        font-size: 11.5px;
+        color: rgba(221, 230, 245, 0.45);
+        margin-top: 2px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .controls {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+        animation: fadeUp 0.5s 0.14s ease both;
+    }
+
+    .play-btn {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #7ec8e3, #5aaac8);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 20px rgba(126, 200, 227, 0.28);
+        flex-shrink: 0;
+        transition: transform 0.15s;
+        color: white;
+    }
+
+    .play-btn:active {
+        transform: scale(0.93);
+    }
+
+    .volume-control {
+        flex: 1;
+    }
+
+    .volume-label {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(221, 230, 245, 0.45);
+        margin-bottom: 8px;
+    }
+
+    .volume-slider {
+        position: relative;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+    }
+
+    .volume-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #5aaac8, #7ec8e3);
+        border-radius: 2px;
+        pointer-events: none;
+        transition: width 0.1s;
+    }
+
+    .volume-input {
+        position: absolute;
+        top: -10px;
+        left: 0;
+        width: 100%;
+        height: calc(100% + 20px);
+        opacity: 0;
+        cursor: pointer;
+        margin: 0;
+    }
+
+    .timer-section {
+        margin-bottom: 20px;
+        animation: fadeUp 0.5s 0.18s ease both;
+    }
+
+    .section-label {
+        font-size: 10px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: rgba(221, 230, 245, 0.45);
+        margin-bottom: 10px;
+    }
+
+    .timer-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+    }
+
+    .timer-btn {
+        padding: 7px 14px;
+        border-radius: 100px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        font-size: 12.5px;
+        font-weight: 500;
+        cursor: pointer;
+        color: rgba(221, 230, 245, 0.5);
+        transition: all 0.2s;
+        font-family: inherit;
+    }
+
+    .timer-btn.active {
+        border-color: rgba(126, 200, 227, 0.5);
+        background: rgba(126, 200, 227, 0.15);
+        color: #7ec8e3;
+    }
+
+    .custom-timer {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .custom-label {
+        font-size: 11px;
+        color: rgba(221, 230, 245, 0.45);
+        white-space: nowrap;
+    }
+
+    .custom-input {
+        width: 70px;
+        padding: 6px 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #dde6f5;
+        font-size: 13px;
+        font-family: inherit;
+        outline: none;
+    }
+
+    .custom-btn {
+        padding: 6px 14px;
+        background: rgba(126, 200, 227, 0.15);
+        border: 1px solid rgba(126, 200, 227, 0.3);
+        border-radius: 8px;
+        color: #7ec8e3;
+        font-size: 12px;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .countdown {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #7ec8e3;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+    }
+
+    .done-message {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #7ec8e3;
+        font-weight: 300;
+    }
+
+    .sound-grid {
+        animation: fadeUp 0.5s 0.24s ease both;
+        margin-bottom: 20px;
+    }
+
+    .sounds {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .sound-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 18px;
+        padding: 16px 14px;
+        cursor: pointer;
+        transition: all 0.25s;
+        position: relative;
+        overflow: hidden;
+        user-select: none;
+    }
+
+    .sound-card:active {
+        transform: scale(0.97);
+    }
+
+    .sound-card.active {
+        box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .active-indicator {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+
+    .sound-emoji {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .sound-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 3px;
+    }
+
+    .sound-freq {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(221, 230, 245, 0.4);
+        margin-bottom: 5px;
+    }
+
+    .sound-desc {
+        font-size: 11px;
+        color: rgba(221, 230, 245, 0.45);
+        line-height: 1.45;
+    }
+
+    .footer {
+        margin-top: 20px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 14px 16px;
+        animation: fadeUp 0.5s 0.3s ease both;
+    }
+
+    .footer p {
+        font-size: 11.5px;
+        color: rgba(221, 230, 245, 0.45);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .footer-highlight {
+        color: #7ec8e3;
+        font-weight: 500;
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="background" id="background"></div>
+
+```
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="header-label">✦ Free &amp; Offline</div>
+        <div class="header-title">
+            Sky<em>Dream</em>
+        </div>
+        <div class="header-subtitle">Sleep sounds for the skies &amp; beyond</div>
+    </div>
+
+    <!-- Now Playing -->
+    <div class="now-playing idle" id="nowPlaying">
+        <div class="visualizer">
+            <div class="bars" id="bars">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+        <div class="now-playing-info">
+            <div class="now-playing-label">Now Playing</div>
+            <div class="now-playing-name" id="nowPlayingName">Select a sound</div>
+            <div class="now-playing-desc" id="nowPlayingDesc">Tap any sound below to begin</div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button class="play-btn" id="playBtn" title="Play/Pause">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="white">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+        </button>
+        <div class="volume-control">
+            <div class="volume-label">Volume</div>
+            <div class="volume-slider">
+                <div class="volume-fill" id="volumeFill"></div>
+                <input type="range" min="0" max="100" value="70" class="volume-input" id="volumeSlider">
+            </div>
+        </div>
+    </div>
+
+    <!-- Timer -->
+    <div class="timer-section">
+        <div class="section-label">Flight Duration Timer</div>
+        <div class="timer-buttons" id="timerButtons"></div>
+        <div class="custom-timer">
+            <span class="custom-label">Custom hours:</span>
+            <input type="number" min="0.5" max="24" step="0.5" placeholder="e.g. 7" class="custom-input" id="customHours">
+            <button class="custom-btn" id="setCustomBtn">Set</button>
+        </div>
+        <div id="countdown"></div>
+        <div id="doneMessage"></div>
+    </div>
+
+    <!-- Sound Grid -->
+    <div class="sound-grid">
+        <div class="section-label">Choose Your Sound</div>
+        <div class="sounds" id="soundGrid"></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>
+            <span class="footer-highlight">How it works:</span> All sounds generated live via Web Audio API — no downloads needed. Works fully offline in airplane mode ✈️
+        </p>
+    </div>
+</div>
+
+<script>
+    const SOUNDS = [
+        { id: "green", name: "Green Noise", freq: "Mid-range · ~500 Hz", emoji: "🌊", desc: "Ocean-like calm. Perfect for anxiety relief and gentle sleep.", color: "#4caf89" },
+        { id: "brown", name: "Brown Noise", freq: "Low bass · Deep rumble", emoji: "🌧️", desc: "Deep, warm rumble. Great for ADHD, stress, and heavy sleepers.", color: "#c49a6c" },
+        { id: "pink", name: "Pink Noise", freq: "Equal octaves · Balanced", emoji: "🌸", desc: "Steady rain feeling. Boosts deep sleep and memory consolidation.", color: "#d47ea0" },
+        { id: "white", name: "White Noise", freq: "All frequencies · Equal", emoji: "🌬️", desc: "Pure static masking. Best for blocking cabin and engine sounds.", color: "#a8bdd4" },
+        { id: "blue", name: "Blue Noise", freq: "High freq · Airy hiss", emoji: "💧", desc: "Crisp and airy. Sharpens focus or helps with tinnitus relief.", color: "#5bb8f5" },
+        { id: "grey", name: "Grey Noise", freq: "Perceptual · Balanced", emoji: "🌫️", desc: "Perceptually flat. Feels like near-silence with depth.", color: "#9ba8b8" },
+    ];
+
+    const TIMERS = [
+        { label: "Off", min: 0 }, { label: "30m", min: 30 }, { label: "1h", min: 60 },
+        { label: "1.5h", min: 90 }, { label: "2h", min: 120 }, { label: "3h", min: 180 },
+        { label: "4h", min: 240 }, { label: "5h", min: 300 }, { label: "6h", min: 360 }, { label: "8h", min: 480 },
+    ];
+
+    // State
+    let activeSound = null;
+    let isPlaying = false;
+    let volume = 70;
+    let timerMin = 0;
+    let audioCtx = null;
+    let masterGain = null;
+    let source = null;
+    let timerInterval = null;
+    let timerEnd = null;
+
+    // Initialize stars background
+    function initStars() {
+        const bg = document.getElementById('background');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'stars';
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const size = Math.random() * 2 + 0.5;
+            const dur = 2 + Math.random() * 4;
+            const delay = Math.random() * 5;
+            const minO = 0.1 + Math.random() * 0.2;
+            const maxO = 0.4 + Math.random() * 0.4;
+
+            star.style.left = left + '%';
+            star.style.top = top + '%';
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.animation = `twinkle ${dur}s ease-in-out ${delay}s infinite`;
+            star.style.setProperty('--minO', minO);
+            star.style.setProperty('--maxO', maxO);
+
+            bg.appendChild(star);
+        }
+
+        // Add twinkle animation to style
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes twinkle {
+                0%, 100% { opacity: var(--minO); }
+                50% { opacity: var(--maxO); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Audio Context
+    function getAudioContext() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            masterGain = audioCtx.createGain();
+            masterGain.gain.value = volume / 100;
+            masterGain.connect(audioCtx.destination);
+        }
+        return audioCtx;
+    }
+
+    // Make noise buffer
+    function makeNoiseBuffer(id) {
+        const ctx = getAudioContext();
+        const len = ctx.sampleRate * 4;
+        const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+        const d = buf.getChannelData(0);
+
+        if (id === "brown") {
+            let last = 0;
+            for (let i = 0; i < len; i++) {
+                const w = Math.random() * 2 - 1;
+                last = (last + 0.02 * w) / 1.02;
+                d[i] = last * 3.5;
+            }
+        } else if (id === "pink") {
+            let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+            for (let i = 0; i < len; i++) {
+                const w = Math.random() * 2 - 1;
+                b0 = 0.99886 * b0 + w * 0.0555179;
+                b1 = 0.99332 * b1 + w * 0.0750759;
+                b2 = 0.96900 * b2 + w * 0.1538520;
+                b3 = 0.86650 * b3 + w * 0.3104856;
+                b4 = 0.55000 * b4 + w * 0.5329522;
+                b5 = -0.7616 * b5 - w * 0.0168980;
+                d[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + w * 0.5362) * 0.11;
+                b6 = w * 0.115926;
+            }
+        } else {
+            for (let i = 0; i < len; i++) {
+                d[i] = Math.random() * 2 - 1;
+            }
+        }
+        return buf;
+    }
+
+    // Start noise
+    function startNoise(id) {
+        const ctx = getAudioContext();
+        const buf = makeNoiseBuffer(id);
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+        src.loop = true;
+
+        if (id === "green") {
+            const bp = ctx.createBiquadFilter();
+            bp.type = "bandpass";
+            bp.frequency.value = 500;
+            bp.Q.value = 0.8;
+            const g = ctx.createGain();
+            g.gain.value = 4;
+            src.connect(bp);
+            bp.connect(g);
+            g.connect(masterGain);
+        } else if (id === "blue") {
+            const hp = ctx.createBiquadFilter();
+            hp.type = "highpass";
+            hp.frequency.value = 1800;
+            hp.Q.value = 0.5;
+            const g = ctx.createGain();
+            g.gain.value = 2.5;
+            src.connect(hp);
+            hp.connect(g);
+            g.connect(masterGain);
+        } else if (id === "grey") {
+            const lo = ctx.createBiquadFilter();
+            lo.type = "lowshelf";
+            lo.frequency.value = 200;
+            lo.gain.value = 5;
+            const hi = ctx.createBiquadFilter();
+            hi.type = "highshelf";
+            hi.frequency.value = 6000;
+            hi.gain.value = 7;
+            const mid = ctx.createBiquadFilter();
+            mid.type = "peaking";
+            mid.frequency.value = 1000;
+            mid.Q.value = 0.5;
+            mid.gain.value = -4;
+            src.connect(lo);
+            lo.connect(mid);
+            mid.connect(hi);
+            hi.connect(masterGain);
+        } else {
+            src.connect(masterGain);
+        }
+
+        src.start(0);
+        return src;
+    }
+
+    // Select sound
+    function selectSound(sound) {
+        const ctx = getAudioContext();
+        if (ctx.state === "suspended") ctx.resume();
+        if (source) {
+            try {
+                source.stop(0);
+            } catch (e) {}
+            source = null;
+        }
+        source = startNoise(sound.id);
+        activeSound = sound;
+        isPlaying = true;
+        updateUI();
+    }
+
+    // Toggle play
+    function togglePlay() {
+        if (!activeSound) return;
+        const ctx = getAudioContext();
+        if (isPlaying) {
+            ctx.suspend().then(() => {
+                isPlaying = false;
+                updateUI();
+            });
+        } else {
+            ctx.resume().then(() => {
+                isPlaying = true;
+                updateUI();
+            });
+        }
+    }
+
+    // Volume control
+    function handleVolume(value) {
+        volume = parseInt(value);
+        if (masterGain) {
+            masterGain.gain.value = volume / 100;
+        }
+        document.getElementById('volumeFill').style.width = volume + '%';
+    }
+
+    // Timer functions
+    function applyTimer(minutes) {
+        clearInterval(timerInterval);
+        timerEnd = null;
+        timerMin = minutes;
+        document.getElementById('countdown').textContent = '';
+        document.getElementById('doneMessage').textContent = '';
+
+        if (minutes === 0) return;
+
+        timerEnd = Date.now() + minutes * 60000;
+        timerInterval = setInterval(() => {
+            const left = timerEnd - Date.now();
+            if (left <= 0) {
+                clearInterval(timerInterval);
+                const ctx = getAudioContext();
+                if (ctx && masterGain) {
+                    masterGain.gain.setValueAtTime(masterGain.gain.value, ctx.currentTime);
+                    masterGain.gain.linearRampToValueAtTime(0, ctx.currentTime + 4);
+                    setTimeout(() => {
+                        ctx.suspend();
+                        isPlaying = false;
+                        document.getElementById('doneMessage').textContent = '✓ Timer complete — sweet dreams';
+                        document.getElementById('countdown').textContent = '';
+                        updateUI();
+                    }, 4500);
+                }
+            } else {
+                const h = Math.floor(left / 3600000);
+                const m = Math.floor((left % 3600000) / 60000);
+                const s = Math.floor((left % 60000) / 1000);
+                const timeStr = h > 0 ? `${h}h ${m}m` : `${m}m ${s}s`;
+                document.getElementById('countdown').textContent = timeStr;
+            }
+        }, 500);
+
+        updateUI();
+    }
+
+    // Render functions
+    function renderTimerButtons() {
+        const container = document.getElementById('timerButtons');
+        container.innerHTML = '';
+        TIMERS.forEach(t => {
+            const btn = document.createElement('button');
+            btn.className = 'timer-btn';
+            if (timerMin === t.min) btn.classList.add('active');
+            btn.textContent = t.label;
+            btn.onclick = () => applyTimer(t.min);
+            container.appendChild(btn);
+        });
+    }
+
+    function renderSoundGrid() {
+        const container = document.getElementById('soundGrid');
+        container.innerHTML = '';
+        SOUNDS.forEach(s => {
+            const card = document.createElement('div');
+            card.className = 'sound-card';
+            if (activeSound?.id === s.id && isPlaying) {
+                card.classList.add('active');
+            }
+
+            const html = `
+                ${activeSound?.id === s.id && isPlaying ? `<div class="active-indicator" style="background: ${s.color}; box-shadow: 0 0 6px ${s.color}"></div>` : ''}
+                <div class="sound-emoji" style="background: ${s.color}22">${s.emoji}</div>
+                <div class="sound-name" style="color: ${s.color}">${s.name}</div>
+                <div class="sound-freq">${s.freq}</div>
+                <div class="sound-desc">${s.desc}</div>
+            `;
+            card.innerHTML = html;
+            card.onclick = () => selectSound(s);
+            container.appendChild(card);
+        });
+    }
+
+    function updateUI() {
+        const nowPlaying = document.getElementById('nowPlaying');
+        if (activeSound && isPlaying) {
+            nowPlaying.classList.remove('idle');
+            document.getElementById('nowPlayingName').textContent = activeSound.name;
+            document.getElementById('nowPlayingDesc').textContent = activeSound.desc;
+
+            // Update bars animation
+            const bars = document.querySelectorAll('.bar');
+            bars.forEach(bar => {
+                bar.classList.add('active');
+            });
+
+            // Update play button
+            document.getElementById('playBtn').innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+        } else {
+            nowPlaying.classList.add('idle');
+            if (!activeSound) {
+                document.getElementById('nowPlayingName').textContent = 'Select a sound';
+                document.getElementById('nowPlayingDesc').textContent = 'Tap any sound below to begin';
+            }
+
+            const bars = document.querySelectorAll('.bar');
+            bars.forEach(bar => {
+                bar.classList.remove('active');
+            });
+
+            document.getElementById('playBtn').innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="white" style="margin-left: 2px"><path d="M8 5v14l11-7z"/></svg>';
+        }
+
+        renderTimerButtons();
+        renderSoundGrid();
+    }
+
+    // Event listeners
+    document.getElementById('playBtn').addEventListener('click', togglePlay);
+    document.getElementById('volumeSlider').addEventListener('input', (e) => handleVolume(e.target.value));
+    document.getElementById('setCustomBtn').addEventListener('click', () => {
+        const v = parseFloat(document.getElementById('customHours').value);
+        if (v > 0) {
+            applyTimer(Math.round(v * 60));
+            timerMin = -1;
+        }
+    });
+
+    // Initialize
+    initStars();
+    renderTimerButtons();
+    renderSoundGrid();
+    document.getElementById('volumeFill').style.width = volume + '%';
+</script>
+```
+
+</body>
+</html>
