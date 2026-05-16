@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyDream - Sleep Sounds for the Skies & Beyond</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+```
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: #1a2744;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #dde6f5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #7ec8e3;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #7ec8e3;
+  cursor: pointer;
+  border: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+@keyframes barAnim {
+  0%, 100% { height: 4px; }
+  50% { height: 20px; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes twinkle0 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.5; } }
+@keyframes twinkle1 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.55; } }
+@keyframes twinkle2 { 0%, 100% { opacity: 0.12; } 50% { opacity: 0.52; } }
+@keyframes twinkle3 { 0%, 100% { opacity: 0.18; } 50% { opacity: 0.58; } }
+@keyframes twinkle4 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.5; } }
+@keyframes twinkle5 { 0%, 100% { opacity: 0.14; } 50% { opacity: 0.54; } }
+@keyframes twinkle6 { 0%, 100% { opacity: 0.16; } 50% { opacity: 0.56; } }
+@keyframes twinkle7 { 0%, 100% { opacity: 0.13; } 50% { opacity: 0.53; } }
+@keyframes twinkle8 { 0%, 100% { opacity: 0.11; } 50% { opacity: 0.51; } }
+@keyframes twinkle9 { 0%, 100% { opacity: 0.17; } 50% { opacity: 0.57; } }
+@keyframes twinkle10 { 0%, 100% { opacity: 0.19; } 50% { opacity: 0.59; } }
+@keyframes twinkle11 { 0%, 100% { opacity: 0.09; } 50% { opacity: 0.49; } }
+@keyframes twinkle12 { 0%, 100% { opacity: 0.16; } 50% { opacity: 0.56; } }
+@keyframes twinkle13 { 0%, 100% { opacity: 0.14; } 50% { opacity: 0.54; } }
+@keyframes twinkle14 { 0%, 100% { opacity: 0.12; } 50% { opacity: 0.52; } }
+@keyframes twinkle15 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.55; } }
+@keyframes twinkle16 { 0%, 100% { opacity: 0.18; } 50% { opacity: 0.58; } }
+@keyframes twinkle17 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.5; } }
+@keyframes twinkle18 { 0%, 100% { opacity: 0.17; } 50% { opacity: 0.57; } }
+@keyframes twinkle19 { 0%, 100% { opacity: 0.11; } 50% { opacity: 0.51; } }
+@keyframes twinkle20 { 0%, 100% { opacity: 0.13; } 50% { opacity: 0.53; } }
+@keyframes twinkle21 { 0%, 100% { opacity: 0.16; } 50% { opacity: 0.56; } }
+@keyframes twinkle22 { 0%, 100% { opacity: 0.14; } 50% { opacity: 0.54; } }
+@keyframes twinkle23 { 0%, 100% { opacity: 0.19; } 50% { opacity: 0.59; } }
+@keyframes twinkle24 { 0%, 100% { opacity: 0.12; } 50% { opacity: 0.52; } }
+@keyframes twinkle25 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.55; } }
+@keyframes twinkle26 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.5; } }
+@keyframes twinkle27 { 0%, 100% { opacity: 0.17; } 50% { opacity: 0.57; } }
+@keyframes twinkle28 { 0%, 100% { opacity: 0.13; } 50% { opacity: 0.53; } }
+@keyframes twinkle29 { 0%, 100% { opacity: 0.18; } 50% { opacity: 0.58; } }
+@keyframes twinkle30 { 0%, 100% { opacity: 0.11; } 50% { opacity: 0.51; } }
+@keyframes twinkle31 { 0%, 100% { opacity: 0.16; } 50% { opacity: 0.56; } }
+@keyframes twinkle32 { 0%, 100% { opacity: 0.14; } 50% { opacity: 0.54; } }
+@keyframes twinkle33 { 0%, 100% { opacity: 0.09; } 50% { opacity: 0.49; } }
+@keyframes twinkle34 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.55; } }
+@keyframes twinkle35 { 0%, 100% { opacity: 0.17; } 50% { opacity: 0.57; } }
+@keyframes twinkle36 { 0%, 100% { opacity: 0.12; } 50% { opacity: 0.52; } }
+@keyframes twinkle37 { 0%, 100% { opacity: 0.19; } 50% { opacity: 0.59; } }
+@keyframes twinkle38 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.5; } }
+@keyframes twinkle39 { 0%, 100% { opacity: 0.16; } 50% { opacity: 0.56; } }
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+.header {
+  text-align: center;
+  padding: 36px 0 8px;
+  animation: fadeUp 0.5s ease both;
+}
+
+.tag {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #7ec8e3;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.title em {
+  font-style: italic;
+  color: #7ec8e3;
+}
+
+.subtitle {
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgba(221, 230, 245, 0.5);
+  font-weight: 300;
+}
+
+.now-playing {
+  margin: 24px 0 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  backdrop-filter: blur(12px);
+  transition: all 0.4s;
+  animation: fadeUp 0.5s 0.08s ease both;
+}
+
+.now-playing.playing {
+  background: rgba(40, 80, 110, 0.08);
+  border-color: rgba(126, 200, 227, 0.2);
+}
+
+.bars {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(40, 80, 110, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  gap: 2.5px;
+}
+
+.bar {
+  width: 3px;
+  border-radius: 2px;
+  background: #7ec8e3;
+  height: 4px;
+  transition: height 0.3s;
+}
+
+.bar.playing {
+  animation: barAnim 0.8s ease-in-out infinite;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.5s 0.14s ease both;
+}
+
+.play-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7ec8e3, #5aaac8);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(126, 200, 227, 0.28);
+  flex-shrink: 0;
+  transition: transform 0.15s;
+  padding: 0;
+}
+
+.play-btn:active {
+  transform: scale(0.93);
+}
+
+.volume-section {
+  flex: 1;
+}
+
+.label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(221, 230, 245, 0.45);
+  margin-bottom: 8px;
+}
+
+.volume-track {
+  position: relative;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.volume-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #5aaac8, #7ec8e3);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.volume-input {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 20px);
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+
+.timer-section {
+  margin-bottom: 20px;
+  animation: fadeUp 0.5s 0.18s ease both;
+}
+
+.timer-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.timer-btn {
+  padding: 7px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  color: rgba(221, 230, 245, 0.5);
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.timer-btn.active {
+  border-color: rgba(126, 200, 227, 0.5);
+  background: rgba(126, 200, 227, 0.15);
+  color: #7ec8e3;
+}
+
+.custom-timer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.custom-label {
+  font-size: 11px;
+  color: rgba(221, 230, 245, 0.45);
+  white-space: nowrap;
+}
+
+.custom-input {
+  width: 70px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #dde6f5;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+}
+
+.custom-btn {
+  padding: 6px 14px;
+  background: rgba(126, 200, 227, 0.15);
+  border: 1px solid rgba(126, 200, 227, 0.3);
+  border-radius: 8px;
+  color: #7ec8e3;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.countdown {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #7ec8e3;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  display: none;
+}
+
+.done-msg {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #7ec8e3;
+  font-weight: 300;
+  display: none;
+}
+
+.sounds-section {
+  animation: fadeUp 0.5s 0.24s ease both;
+}
+
+.sounds-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.sound-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 16px 14px;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.sound-card:active {
+  transform: scale(0.97);
+}
+
+.sound-card.active {
+  box-shadow: 0 0 18px rgba(126, 200, 227, 0.22);
+}
+
+.active-dot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: none;
+}
+
+.emoji-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.sound-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sound-freq {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(221, 230, 245, 0.4);
+  margin-bottom: 5px;
+}
+
+.sound-desc {
+  font-size: 11px;
+  color: rgba(221, 230, 245, 0.45);
+  line-height: 1.45;
+}
+
+.footer {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 14px 16px;
+  animation: fadeUp 0.5s 0.3s ease both;
+}
+
+.footer p {
+  font-size: 11.5px;
+  color: rgba(221, 230, 245, 0.45);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.footer-highlight {
+  color: #7ec8e3;
+  font-weight: 500;
+}
+
+.bg-base {
+  position: fixed;
+  inset: 0;
+  background: #1a2744;
+  z-index: 0;
+}
+
+.bg-aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 80% 40% at 20% 0%, rgba(80, 130, 200, 0.18) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 10%, rgba(90, 180, 160, 0.11) 0%, transparent 55%), radial-gradient(ellipse 100% 60% at 50% 100%, rgba(50, 80, 160, 0.2) 0%, transparent 50%);
+}
+
+.bg-stars {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+}
+```
+
+  </style>
+</head>
+<body>
+  <div class="bg-base"></div>
+  <div class="bg-aurora"></div>
+  <div class="bg-stars" id="stars"></div>
+
+  <div class="container">
+    <div class="header">
+      <div class="tag">✦ Free &amp; Offline</div>
+      <div class="title">Sky<em>Dream</em></div>
+      <div class="subtitle">Sleep sounds for the skies &amp; beyond</div>
+    </div>
+
+```
+<div class="now-playing" id="nowPlaying">
+  <div class="bars">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <div style="flex: 1; min-width: 0;">
+    <div class="label">Now Playing</div>
+    <div class="sound-name" id="nowPlayingName">Select a sound</div>
+    <div style="font-size: 11.5px; color: rgba(221,230,245,0.45); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="nowPlayingDesc">Tap any sound below to begin</div>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="play-btn" id="playBtn">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="white" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
+  </button>
+  <div class="volume-section">
+    <div class="label">Volume</div>
+    <div class="volume-track">
+      <div class="volume-fill" id="volumeFill" style="width: 70%;"></div>
+      <input type="range" class="volume-input" id="volumeInput" min="0" max="100" value="70">
+    </div>
+  </div>
+</div>
+
+<div class="timer-section">
+  <div class="label" style="margin-bottom: 10px;">Flight Duration Timer</div>
+  <div class="timer-buttons" id="timerButtons"></div>
+  <div class="custom-timer">
+    <span class="custom-label">Custom hours:</span>
+    <input type="number" class="custom-input" id="customHours" min="0.5" max="24" step="0.5" placeholder="e.g. 7">
+    <button class="custom-btn" id="setTimerBtn">Set</button>
+  </div>
+  <div class="countdown" id="countdown"></div>
+  <div class="done-msg" id="doneMsg">✓ Timer complete — sweet dreams</div>
+</div>
+
+<div class="sounds-section">
+  <div class="label" style="margin-bottom: 10px;">Choose Your Sound</div>
+  <div class="sounds-grid" id="soundsGrid"></div>
+</div>
+
+<div class="footer">
+  <p><span class="footer-highlight">How it works:</span> All sounds generated live via Web Audio API — no downloads needed. Works fully offline in airplane mode ✈️</p>
+</div>
+```
+
+  </div>
+
+  <script>
+    const SOUNDS = [
+      { id: "green", name: "Green Noise", freq: "Mid-range · ~500 Hz", emoji: "🌊", desc: "Ocean-like calm. Perfect for anxiety relief and gentle sleep.", color: "#4caf89" },
+      { id: "brown", name: "Brown Noise", freq: "Low bass · Deep rumble", emoji: "🌧️", desc: "Deep, warm rumble. Great for ADHD, stress, and heavy sleepers.", color: "#c49a6c" },
+      { id: "pink", name: "Pink Noise", freq: "Equal octaves · Balanced", emoji: "🌸", desc: "Steady rain feeling. Boosts deep sleep and memory consolidation.", color: "#d47ea0" },
+      { id: "white", name: "White Noise", freq: "All frequencies · Equal", emoji: "🌬️", desc: "Pure static masking. Best for blocking cabin and engine sounds.", color: "#a8bdd4" },
+      { id: "blue", name: "Blue Noise", freq: "High freq · Airy hiss", emoji: "💧", desc: "Crisp and airy. Sharpens focus or helps with tinnitus relief.", color: "#5bb8f5" },
+      { id: "grey", name: "Grey Noise", freq: "Perceptual · Balanced", emoji: "🌫️", desc: "Perceptually flat. Feels like near-silence with depth.", color: "#9ba8b8" },
+    ];
+
+    const TIMERS = [
+      { label: "Off", min: 0 }, { label: "30m", min: 30 }, { label: "1h", min: 60 },
+      { label: "1.5h", min: 90 }, { label: "2h", min: 120 }, { label: "3h", min: 180 },
+      { label: "4h", min: 240 }, { label: "5h", min: 300 }, { label: "6h", min: 360 }, { label: "8h", min: 480 },
+    ];
+
+    let activeSound = null;
+    let isPlaying = false;
+    let volume = 70;
+    let timerMin = 0;
+    let timerRef = null;
+    let timerEndRef = null;
+
+    let audioCtx = null;
+    let masterGain = null;
+    let source = null;
+
+    function getCtx() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        masterGain = audioCtx.createGain();
+        masterGain.gain.value = volume / 100;
+        masterGain.connect(audioCtx.destination);
+      }
+      return audioCtx;
+    }
+
+    function makeNoiseBuffer(ctx, id) {
+      const len = ctx.sampleRate * 4;
+      const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      if (id === "brown") {
+        let last = 0;
+        for (let i = 0; i < len; i++) {
+          const w = Math.random() * 2 - 1;
+          last = (last + 0.02 * w) / 1.02;
+          d[i] = last * 3.5;
+        }
+      } else if (id === "pink") {
+        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+        for (let i = 0; i < len; i++) {
+          const w = Math.random() * 2 - 1;
+          b0 = 0.99886 * b0 + w * 0.0555179;
+          b1 = 0.99332 * b1 + w * 0.0750759;
+          b2 = 0.96900 * b2 + w * 0.1538520;
+          b3 = 0.86650 * b3 + w * 0.3104856;
+          b4 = 0.55000 * b4 + w * 0.5329522;
+          b5 = -0.7616 * b5 - w * 0.0168980;
+          d[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + w * 0.5362) * 0.11;
+          b6 = w * 0.115926;
+        }
+      } else {
+        for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      }
+      return buf;
+    }
+
+    function startNoise(ctx, id) {
+      const buf = makeNoiseBuffer(ctx, id);
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.loop = true;
+      
+      if (id === "green") {
+        const bp = ctx.createBiquadFilter();
+        bp.type = "bandpass";
+        bp.frequency.value = 500;
+        bp.Q.value = 0.8;
+        const g = ctx.createGain();
+        g.gain.value = 4;
+        src.connect(bp);
+        bp.connect(g);
+        g.connect(masterGain);
+      } else if (id === "blue") {
+        const hp = ctx.createBiquadFilter();
+        hp.type = "highpass";
+        hp.frequency.value = 1800;
+        hp.Q.value = 0.5;
+        const g = ctx.createGain();
+        g.gain.value = 2.5;
+        src.connect(hp);
+        hp.connect(g);
+        g.connect(masterGain);
+      } else if (id === "grey") {
+        const lo = ctx.createBiquadFilter();
+        lo.type = "lowshelf";
+        lo.frequency.value = 200;
+        lo.gain.value = 5;
+        const hi = ctx.createBiquadFilter();
+        hi.type = "highshelf";
+        hi.frequency.value = 6000;
+        hi.gain.value = 7;
+        const mid = ctx.createBiquadFilter();
+        mid.type = "peaking";
+        mid.frequency.value = 1000;
+        mid.Q.value = 0.5;
+        mid.gain.value = -4;
+        src.connect(lo);
+        lo.connect(mid);
+        mid.connect(hi);
+        hi.connect(masterGain);
+      } else {
+        src.connect(masterGain);
+      }
+      src.start(0);
+      return src;
+    }
+
+    function selectSound(sound) {
+      const ctx = getCtx();
+      if (ctx.state === "suspended") ctx.resume();
+      if (source) {
+        try { source.stop(0); } catch(e) {}
+        source = null;
+      }
+      source = startNoise(ctx, sound.id);
+      activeSound = sound;
+      isPlaying = true;
+      updateUI();
+    }
+
+    function togglePlay() {
+      if (!activeSound) return;
+      const ctx = getCtx();
+      if (isPlaying) {
+        ctx.suspend().then(() => {
+          isPlaying = false;
+          updateUI();
+        });
+      } else {
+        ctx.resume().then(() => {
+          isPlaying = true;
+          updateUI();
+        });
+      }
+    }
+
+    function handleVolume(e) {
+      volume = Number(e.target.value);
+      document.getElementById('volumeFill').style.width = volume + '%';
+      if (masterGain) masterGain.gain.value = volume / 100;
+    }
+
+    function applyTimer(minutes) {
+      clearInterval(timerRef);
+      timerEndRef = null;
+      timerMin = minutes;
+      document.getElementById('countdown').style.display = 'none';
+      document.getElementById('doneMsg').style.display = 'none';
+
+      if (minutes === 0) {
+        updateTimerUI();
+        return;
+      }
+
+      timerEndRef = Date.now() + minutes * 60000;
+      timerRef = setInterval(() => {
+        const left = timerEndRef - Date.now();
+        if (left <= 0) {
+          clearInterval(timerRef);
+          const ctx = audioCtx;
+          const mg = masterGain;
+          if (ctx && mg) {
+            mg.gain.setValueAtTime(mg.gain.value, ctx.currentTime);
+            mg.gain.linearRampToValueAtTime(0, ctx.currentTime + 4);
+            setTimeout(() => {
+              ctx.suspend();
+              isPlaying = false;
+              document.getElementById('countdown').style.display = 'none';
+              document.getElementById('doneMsg').style.display = 'block';
+              updateUI();
+            }, 4500);
+          }
+        } else {
+          const s = Math.floor(left / 1000);
+          const h = Math.floor(s / 3600);
+          const m = Math.floor((s % 3600) / 60);
+          const sec = s % 60;
+          const text = h > 0 
+            ? `⏱ Stops in ${h}h ${String(m).padStart(2, "0")}m`
+            : `⏱ Stops in ${m}:${String(sec).padStart(2, "0")}`;
+          document.getElementById('countdown').textContent = text;
+          document.getElementById('countdown').style.display = 'block';
+        }
+      }, 1000);
+
+      updateTimerUI();
+    }
+
+    function updateUI() {
+      const nowPlaying = document.getElementById('nowPlaying');
+      const playBtn = document.getElementById('playBtn');
+      const playIcon = document.getElementById('playIcon');
+      const bars = document.querySelectorAll('.bar');
+
+      document.getElementById('nowPlayingName').textContent = activeSound ? activeSound.name : "Select a sound";
+      document.getElementById('nowPlayingDesc').textContent = activeSound ? activeSound.desc : "Tap any sound below to begin";
+
+      if (isPlaying) {
+        nowPlaying.classList.add('playing');
+        playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        bars.forEach(bar => bar.classList.add('playing'));
+      } else {
+        nowPlaying.classList.remove('playing');
+        playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        playIcon.style.marginLeft = '2px';
+        bars.forEach(bar => bar.classList.remove('playing'));
+      }
+
+      document.querySelectorAll('.sound-card').forEach(card => {
+        const soundId = card.dataset.soundId;
+        const dot = card.querySelector('.active-dot');
+        if (activeSound && soundId === activeSound.id && isPlaying) {
+          card.classList.add('active');
+          dot.style.display = 'block';
+        } else {
+          card.classList.remove('active');
+          dot.style.display = 'none';
+        }
+      });
+    }
+
+    function updateTimerUI() {
+      document.querySelectorAll('.timer-btn').forEach(btn => {
+        const btnMin = parseInt(btn.dataset.min);
+        if (btnMin === timerMin) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    // Initialize stars
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const left = Math.random() * 100;
+      const top = Math.random() * 100;
+      const size = Math.random() * 2 + 0.5;
+      const dur = 2 + Math.random() * 4;
+      const delay = Math.random() * 5;
+      const minO = 0.1 + Math.random() * 0.2;
+      const maxO = 0.4 + Math.random() * 0.4;
+
+      star.style.left = left + '%';
+      star.style.top = top + '%';
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.background = `rgba(255,255,255,${maxO})`;
+      star.style.opacity = minO;
+      star.style.animation = `twinkle${Math.floor(dur * 10 % 40)} ${dur}s ease-in-out ${delay}s infinite alternate`;
+      starsContainer.appendChild(star);
+    }
+
+    // Initialize timers
+    const timerButtons = document.getElementById('timerButtons');
+    TIMERS.forEach(timer => {
+      const btn = document.createElement('button');
+      btn.className = 'timer-btn';
+      btn.dataset.min = timer.min;
+      btn.textContent = timer.label;
+      btn.onclick = () => applyTimer(timer.min);
+      timerButtons.appendChild(btn);
+    });
+
+    // Initialize sounds
+    const soundsGrid = document.getElementById('soundsGrid');
+    SOUNDS.forEach(sound => {
+      const card = document.createElement('div');
+      card.className = 'sound-card';
+      card.dataset.soundId = sound.id;
+      card.innerHTML = `
+        <div class="active-dot" style="background: ${sound.color}; box-shadow: 0 0 6px ${sound.color};"></div>
+        <div class="emoji-box" style="background: ${sound.color}22;">
+          ${sound.emoji}
+        </div>
+        <div class="sound-name" style="color: ${sound.color};">${sound.name}</div>
+        <div class="sound-freq">${sound.freq}</div>
+        <div class="sound-desc">${sound.desc}</div>
+      `;
+      card.onclick = () => selectSound(sound);
+      soundsGrid.appendChild(card);
+    });
+
+    // Event listeners
+    document.getElementById('playBtn').onclick = togglePlay;
+    document.getElementById('volumeInput').onchange = handleVolume;
+    document.getElementById('setTimerBtn').onclick = () => {
+      const v = parseFloat(document.getElementById('customHours').value);
+      if (v > 0) {
+        applyTimer(Math.round(v * 60));
+        timerMin = -1;
+        updateTimerUI();
+      }
+    };
+  </script>
+
+</body>
+</html>
